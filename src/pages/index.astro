@@ -1,14 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PlayListItemCard from "@/components/PlayListItemCard.astro";
+
+import Greetings from "@/components/Greetings.svelte";
+
+import { playlists } from "@/lib/data";
 ---
 
-<Layout title="Welcome to Astro." />
+<Layout title="Spotify Clone">
+  <div
+    id="playlist-container"
+    class="relative transition-all duration-1000 bg-green-600 flex flex-col flex-1"
+  >
+    <!-- <PageHeader /> -->
+    <div class="relative z-10 px-6 mt-4">
+      <Greetings client:visible />
+      <div class="flex gap-4">
+        {playlists.map((playlist) => <PlayListItemCard playlist={playlist} />)}
+      </div>
+    </div>
 
-<style>
-  #app {
-    display: grid;
-    grid-template-areas:
-      "aside main main"
-      "player player player";
-  }
-</style>
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900"></div>
+  </div>
+</Layout>
+
+<style></style>

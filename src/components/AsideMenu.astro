@@ -1,17 +1,28 @@
 ---
 import SideMenuItem from "./SideMenuItem.astro";
+import SideMenuCard from "./SideMenuCard.astro";
+import { playlists } from "@/lib/data";
+import { Search, Home, BookOpen } from "astro-feather-icons";
 ---
 
 <nav class="flex flex-col flex-1 gap-2">
   <div class="bg-zinc-900 rounded-lg p-2">
     <ul>
-      <SideMenuItem href="/">Home</SideMenuItem>
-      <SideMenuItem href="/search">Search</SideMenuItem>
+      <SideMenuItem href="/"><Home /> Home</SideMenuItem>
+      <SideMenuItem href="/search"><Search /> Search</SideMenuItem>
     </ul>
   </div>
   <div class="bg-zinc-900 rounded-lg p-2 flex-1">
     <ul>
-      <SideMenuItem href="/">Tu bibilioteca</SideMenuItem>
+      <SideMenuItem href="/"><BookOpen />Tu bibilioteca</SideMenuItem>
+
+      {
+        playlists.map((playlist) => (
+          <li>
+            <SideMenuCard playlist={playlist} />
+          </li>
+        ))
+      }
     </ul>
   </div>
 </nav>

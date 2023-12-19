@@ -1,10 +1,22 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "/Users/aerda/src/omdental",
     "paths": {
-      "@/*": ["src/*"],
-      "@/components": ["src/components/*"]
-    }
+      "@/*": [
+        "src/*"
+      ],
+      "@/components": [
+        "src/components/*"
+      ],
+      "@/lib": [
+        "src/lib/*"
+      ]
+    },
+    "types": [
+      "@types/astro-feather-icons"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

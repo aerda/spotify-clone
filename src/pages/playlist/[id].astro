@@ -1,0 +1,64 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PlayListItemCard from "@/components/PlayListItemCard.astro";
+
+import { allPlaylists, songs } from "@/lib/data";
+
+const { id } = Astro.params;
+
+const playlist = allPlaylists.find(
+  (playlist) => playlist.id === Astro.params.id,
+);
+
+const playListSongs = songs.filter(
+  (song) => song.albumId === playlist?.albumId,
+);
+
+const artistString = playlist?.artists.join(",");
+---
+
+<Layout title="Spotify Clone">
+  <div
+    id="playlist-container"
+    class="relative flex flex-col h-full bg-zinc-900 overflow-x-hidden"
+    transition:name=`playlist ${id} box`
+  >
+    <header class="flex gap-8 px-6 mt-12">
+      <picture class="aspect-square w-52 h-52 flex-none">
+        <img
+          src={playlist?.cover}
+          alt="cover"
+          class="object-cover w-full h-full shadow-xl"
+          transition:name=`playlist ${playlist?.id} image`
+        />
+      </picture>
+      <div class="flex flex-col justify-between">
+        <div class="flex flex-1 text-sm items-end">Playlist</div>
+        <div>
+          <h1 class="font-bold block text-5xl text-white">
+            {playlist?.title}
+            <span transition:name=`playlist ${id} title`></span>
+          </h1>
+        </div>
+
+        <div class="flex flex-1 items-end">
+          <div class="text-sm text-gray-300 font-normal">
+            <div transition:name=`playlist ${id} artists`>
+              {artistString}
+            </div>
+            <p class="mt-1">
+              <span class="text-white">50 canciones</span>, 3 h
+              aproximandatmanete
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- <PageHeader /> -->
+    <div class="relative z-10 px-6 mt-4"></div>
+
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 -z-10"></div>
+  </div>
+</Layout>
+
+<style></style>
