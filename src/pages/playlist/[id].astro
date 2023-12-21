@@ -1,8 +1,10 @@
 ---
+import MusicTable from "@/components/MusicTable.astro";
 import Layout from "../../layouts/Layout.astro";
 import PlayListItemCard from "@/components/PlayListItemCard.astro";
 
 import { allPlaylists, songs } from "@/lib/data";
+import { CardPlayButton } from "@/components/CardPlayButton";
 
 const { id } = Astro.params;
 
@@ -20,7 +22,7 @@ const artistString = playlist?.artists.join(",");
 <Layout title="Spotify Clone">
   <div
     id="playlist-container"
-    class="relative flex flex-col h-full bg-zinc-900 overflow-x-hidden"
+    class="relative flex flex-col h-full bg-zinc-900 overflow-x-hidden min-w-full"
     transition:name=`playlist ${id} box`
   >
     <header class="flex gap-8 px-6 mt-12">
@@ -47,8 +49,15 @@ const artistString = playlist?.artists.join(",");
               {artistString}
             </div>
             <p class="mt-1">
-              <span class="text-white">50 canciones</span>, 3 h
-              aproximandatmanete
+              <span class="text-white">{playListSongs.length} canciones</span>,
+              <!-- {
+                playListSongs.reduce(
+                  (accumulator, song): number => accumulator + song.duration,
+                  0,
+                )
+              } -->
+
+               aproximadamente
             </p>
           </div>
         </div>
@@ -56,8 +65,13 @@ const artistString = playlist?.artists.join(",");
     </header>
     <!-- <PageHeader /> -->
     <div class="relative z-10 px-6 mt-4"></div>
-
     <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 -z-10"></div>
+    <div class="relative pl-6">
+      <CardPlayButton id={id} size="large" client:only="react" />
+    </div>
+    <section class="p-6">
+      <MusicTable songs={playListSongs} playlistId={playlist?.id} />
+    </section>
   </div>
 </Layout>
 

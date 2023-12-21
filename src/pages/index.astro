@@ -10,17 +10,17 @@ import { playlists } from "@/lib/data";
 <Layout title="Spotify Clone">
   <div
     id="playlist-container"
-    class="relative transition-all duration-1000 bg-green-600 flex flex-col flex-1"
+    class="relative transition-all duration-1000 bg-green-600 flex flex-col flex-1 pb-6 overflow-hidden"
   >
     <!-- <PageHeader /> -->
     <div class="relative z-10 px-6 mt-4">
       <Greetings client:visible />
-      <div class="flex gap-4">
+      <div class="flex gap-4 overscroll-auto hover:overflow-x-auto">
         {playlists.map((playlist) => <PlayListItemCard playlist={playlist} />)}
       </div>
     </div>
 
-    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950"></div>
   </div>
 </Layout>
 

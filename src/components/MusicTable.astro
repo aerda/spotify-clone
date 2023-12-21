@@ -1,0 +1,64 @@
+---
+import Time from "@/icons/Time.astro";
+import type { Song } from "@/lib/data";
+import { CardPlayButton } from "./CardPlayButton";
+import { PlayListPlayButton } from "./PlayListPlayButton";
+import { MusicTableSongTitle } from "./MusicTableSongTitle";
+
+interface Props {
+  songs: Song[];
+  playlistId: string | undefined;
+}
+
+const { songs, playlistId } = Astro.props;
+---
+
+<table class="table-auto text-left min-w-full divide-y divide-gray-500/20">
+  <thead>
+    <tr class="text-gray-300 text-sm font-light">
+      <th class="py-2 px-4">#</th>
+      <th class="py-2 px-4">Title</th>
+      <th class="py-2 px-4">Album</th>
+      <th class="py-2 px-4"><Time /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="h-2"></tr>
+    {
+      songs.map((song, index) => (
+        <tr class="text-gra-300 text-sm font-light hover:bg-zinc-500 transition-all duration-300">
+          <td class="py-2 px-4 rounded-tl-lg rounded-bl-lg w-[7px]">
+            <PlayListPlayButton
+              trackNumber={index}
+              playlistId={playlistId}
+              song={song}
+              client:only="react"
+            />
+          </td>
+          <td class="py-2 px-4 flex gap-3">
+            <picture>
+              <img
+                src={song.image}
+                alt={song.title}
+                class=" w-10 h-10 rounded-md"
+              />
+            </picture>
+            <div class="flex flex-col">
+              <MusicTableSongTitle
+                playlistId={playlistId}
+                song={song}
+                title={song.title}
+                client:load
+              />
+              <span class=" text-xs text-gray-400">
+                {song.artists.join(", ")}
+              </span>
+            </div>
+          </td>
+          <td class="py-2 px-4">{song.album}</td>
+          <td class="py-2 px-4 rounded-tr-lg rounded-br-lg">{song.duration}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

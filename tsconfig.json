@@ -1,21 +1,15 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "/Users/aerda/src/omdental",
+    "baseUrl": "/Users/aerda/src/spotify",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@/components": [
-        "src/components/*"
-      ],
-      "@/lib": [
-        "src/lib/*"
-      ]
+      "@/*": ["src/*"],
+      "@/components": ["src/components/*"],
+      "@/lib": ["src/lib/*"],
+      "@/store": ["src/store/*"],
+      "@/icons": ["src/icons/*"]
     },
-    "types": [
-      "@types/astro-feather-icons"
-    ],
+    "types": ["@types/astro-feather-icons"],
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   }

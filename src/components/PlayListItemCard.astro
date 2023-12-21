@@ -1,5 +1,6 @@
 ---
 import type { Playlist } from "@/lib/data";
+import { CardPlayButton } from "./CardPlayButton";
 
 type Props = {
   playlist: Playlist;
@@ -11,29 +12,38 @@ const { id, cover, title, artists, color } = playlist;
 const artistString = artists.join(",");
 ---
 
-<a
-  href={`/playlist/${id}`}
-  class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden items-center gap-2 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-xl bg-zinc-500/30 w-44 flex-col"
-  transition:name=`playlist ${id} box`
+<article
+  class="relative group hover:bg-zinc-800 shadow-lg hover:shadow-xl bg-zinc-500/30 rounded-md"
 >
-  <picture class="aspect-square w-full h-auto flex-none">
-    <img
-      src={cover}
-      alt="cover"
-      class="object-cover w-full h-full rounded-md"
-      transition:name=`playlist ${id} image`
-    />
-  </picture>
-  <div class="flex flex-auto flex-col px-0 overflow-hidden items-start">
-    <h4 class="font-medium text-sm" transition:name=`playlist ${id} title`>
-      {title}
-    </h4>
-
-    <span
-      class="text-xs text-gray-400 text-ellipsis"
-      transition:name=`playlist ${id} artists`
-    >
-      {artistString}
-    </span>
+  <div
+    class="absolute z-10 right-4 bottom-12 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:-translate-y-4 text-black"
+  >
+    <CardPlayButton id={id} client:load />
   </div>
-</a>
+  <a
+    href={`/playlist/${id}`}
+    class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden items-center gap-2 w-44 flex-col"
+    transition:name=`playlist ${id} box`
+  >
+    <picture class="aspect-square w-full h-auto flex-none">
+      <img
+        src={cover}
+        alt="cover"
+        class="object-cover w-full h-full rounded-md"
+        transition:name=`playlist ${id} image`
+      />
+    </picture>
+    <div class="flex flex-auto flex-col px-0 overflow-hidden items-start">
+      <h4 class="font-medium text-sm" transition:name=`playlist ${id} title`>
+        {title}
+      </h4>
+
+      <span
+        class="text-xs text-gray-400 text-ellipsis"
+        transition:name=`playlist ${id} artists`
+      >
+        {artistString}
+      </span>
+    </div>
+  </a>
+</article>
